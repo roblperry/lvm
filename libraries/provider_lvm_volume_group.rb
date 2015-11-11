@@ -124,13 +124,15 @@ class Chef
         if lvm.volume_groups[name]
           Chef::Log.info "Volume group '#{name}' already exists. Not creating..."
         else
-          physical_volumes = physical_volume_list.join(' ')
-          physical_extent_size = new_resource.physical_extent_size ? "-s #{new_resource.physical_extent_size}" : ''
-          command = "vgcreate #{name} #{physical_extent_size} #{physical_volumes}"
-          Chef::Log.debug "Executing lvm command: '#{command}'"
-          output = lvm.raw command
-          Chef::Log.debug "Command output: '#{output}'"
-          new_resource.updated_by_last_action(true)
+          converge_by("Creating volume group '#{new_resource.name}'") do
+            physical_volumes = physical_volume_list.join(' ')
+            physical_extent_size = new_resource.physical_extent_size ? "-s #{new_resource.physical_extent_size}" : ''
+            command = "vgcreate #{name} #{physical_extent_size} #{physical_volumes}"
+            Chef::Log.debug "Executing lvm command: '#{command}'"
+            output = lvm.raw command
+            Chef::Log.debug "Command output: '#{output}'"
+            new_resource.updated_by_last_action(true)
+          end
         end
       end
 
