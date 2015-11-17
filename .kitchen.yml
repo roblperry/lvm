@@ -22,3 +22,8 @@ suites:
   - name: default
     run_list:
       - recipe[lvm::default]
+  - name: create
+    run_list:
+      - recipe[lvm::default]
+      - recipe[fake::create]
+      - recipe[fake::resize]
