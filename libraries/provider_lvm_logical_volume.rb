@@ -43,7 +43,7 @@ class Chef
       def action_create
         require 'lvm'
         lvm = LVM::LVM.new
-        name = new_resource.name
+        name = new_resource.volume_name
         group = new_resource.group
         lv_params = new_resource.lv_params
         fs_type = new_resource.filesystem
@@ -142,7 +142,7 @@ class Chef
       def action_resize
         require 'lvm'
         lvm = LVM::LVM.new
-        name = new_resource.name
+        name = new_resource.volume_name
         group = new_resource.group
         device_name = "/dev/mapper/#{to_dm_name(group)}-#{to_dm_name(name)}"
 

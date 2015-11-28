@@ -40,20 +40,18 @@ class Chef
         @provider = Chef::Provider::LvmLogicalVolume
       end
 
-      # Attribute: name - name of the logical volume
+      # Attribute: volume_name - name of the logical volume
       #
       # @param arg [String] the name of the logical volume
       #
       # @return [String] the name of the logical volume
       #
-      def name(arg = nil)
+      def volume_name(arg = nil)
         set_or_return(
-          :name,
+          :volume_name,
           arg,
           kind_of: String,
           regex: /[\w+.-]+/,
-          name_attribute: true,
-          required: true,
           callbacks: {
             "cannot be '.', '..', 'snapshot', or 'pvmove'" => proc do |value|
               !(value == '.' || value == '..' || value == 'snapshot' || value == 'pvmove')
@@ -62,7 +60,7 @@ class Chef
               !value.match(/.*(_mlog|_mimage).*/)
             end
           }
-        )
+        ) || self.name
       end
 
       # Attribute: group - the volume group the logical volume belongs to

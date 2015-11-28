@@ -59,7 +59,7 @@ end
 #
 lvm_logical_volume 'small_resize_test' do
   action :resize
-  name 'small_resize'
+  volume_name 'small_resize'
   group 'vg-test'
   size '16M'
   filesystem 'ext3'
@@ -94,7 +94,7 @@ end
 #
 lvm_logical_volume 'percent_resize_test' do
   action :resize
-  name 'percent_resize'
+  volume_name 'percent_resize'
   group 'vg-test'
   size '10%VG'
   filesystem 'ext3'
@@ -130,7 +130,7 @@ end
 #
 lvm_logical_volume 'small_noresize_test' do
   action :resize
-  name 'small_noresize'
+  volume_name 'small_noresize'
   group 'vg-test'
   size '8M'
   filesystem 'ext3'
@@ -166,7 +166,7 @@ end
 #
 lvm_logical_volume 'percent_noresize_test' do
   action :resize
-  name 'percent_noresize'
+  volume_name 'percent_noresize'
   group 'vg-test'
   size '5%VG'
   filesystem 'ext3'
@@ -185,7 +185,7 @@ end
 #
 lvm_logical_volume 'remainder_resize' do
   action [:create, :resize]
-  name 'remainder_resize'
+  volume_name 'remainder_resize'
   group 'vg-test'
   size '1'
   filesystem 'ext3'

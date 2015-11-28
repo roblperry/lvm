@@ -162,7 +162,8 @@ end
 
 # Creates a small logical volume
 #
-lvm_logical_volume 'small' do
+lvm_logical_volume 'small redefined' do
+  volume_name 'small'
   group 'vg-test'
   size '2%VG'
   filesystem 'ext3'

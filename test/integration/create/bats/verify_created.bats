@@ -150,5 +150,5 @@ export PATH=$PATH:/sbin:/usr/sbin
 
 @test "detects notification for creation of small volume" {
   grep 'small volume has been created' /tmp/test_notifications
-  # TODO: Fix This [ $(grep 'small volume has been created' /tmp/test_notifications | wc -l) -eq 1 ]
+  [ $(grep 'small volume has been created' /tmp/test_notifications | wc -l) -eq 1 ]
 }
