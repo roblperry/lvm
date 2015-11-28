@@ -39,12 +39,12 @@ class Chef
       def action_create
         require 'lvm'
         lvm = LVM::LVM.new
-        if lvm.physical_volumes[new_resource.name].nil?
-          Chef::Log.info "Creating physical volume '#{new_resource.name}'"
-          lvm.raw "pvcreate #{new_resource.name}"
+        if lvm.physical_volumes[new_resource.volume_name].nil?
+          Chef::Log.info "Creating physical volume '#{new_resource.volume_name}'"
+          lvm.raw "pvcreate #{new_resource.volume_name}"
           new_resource.updated_by_last_action(true)
         else
-          Chef::Log.info "Physical volume '#{new_resource.name}' found. Not creating..."
+          Chef::Log.info "Physical volume '#{new_resource.volume_name}' found. Not creating..."
         end
       end
 
@@ -52,7 +52,7 @@ class Chef
         require 'lvm'
         lvm = LVM::LVM.new
         pv = lvm.physical_volumes.select do |pvs|
-          pvs.name == new_resource.name
+          pvs.name == new_resource.volume_name
         end
         if !pv.empty?
           # get the size the OS says the block device is
@@ -70,15 +70,15 @@ class Chef
 
           # only resize if they are not same
           if pv_size != block_device_allocatable_size
-            Chef::Log.info "Resizing physical volume '#{new_resource.name}'"
-            lvm.raw "pvresize #{new_resource.name}"
+            Chef::Log.info "Resizing physical volume '#{new_resource.volume_name}'"
+            lvm.raw "pvresize #{new_resource.volume_name}"
             # broadcast that we did a resize
             new_resource.updated_by_last_action true
           else
-            Chef::Log.debug "Physical volume '#{new_resource.name}' is already the right size"
+            Chef::Log.debug "Physical volume '#{new_resource.volume_name}' is already the right size"
           end
         else
-          Chef::Log.info "Physical volume '#{new_resource.name}' found. Not resizing..."
+          Chef::Log.info "Physical volume '#{new_resource.volume_name}' found. Not resizing..."
         end
       end
     end

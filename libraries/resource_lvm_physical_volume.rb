@@ -40,20 +40,20 @@ class Chef
         @provider = Chef::Provider::LvmPhysicalVolume
       end
 
-      # Attribute: name - the physical device
+      # Attribute: volume_name - the physical device
       #
       # @param arg [String] the physical device
       #
       # @return [String] the physical device
       #
-      def name(arg = nil)
+      def volume_name(arg = nil)
         set_or_return(
-          :name,
+          :volume_name,
           arg,
-          kind_of: String,
-          name_attribute: true,
-          required: true
-        )
+          kind_of: String
+        ) || self.name
+        # Done this way (instead of setting the default volume name inside of the initialize) for,
+        # backward compatability with recipies that set name inside of the block
       end
     end
   end
