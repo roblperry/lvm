@@ -44,7 +44,7 @@ class Chef
         @updates = []
 
         require 'lvm'
-        name = new_resource.name
+        name = new_resource.group_name
         physical_volume_list = [new_resource.physical_volumes].flatten
 
         # Make sure any pvs are not being used as filesystems (e.g. ephemeral0 on
@@ -71,7 +71,7 @@ class Chef
         @updates = []
 
         require 'lvm'
-        name = new_resource.name
+        name = new_resource.group_name
         physical_volume_list = [new_resource.physical_volumes].flatten
         lvm = LVM::LVM.new
 
@@ -144,7 +144,7 @@ class Chef
 
       def create_logical_volumes
         new_resource.logical_volumes.each do |lv|
-          lv.group new_resource.name
+          lv.group new_resource.group_name
           lv.run_action :create
           @updates << lv.updated?
         end
@@ -152,7 +152,7 @@ class Chef
 
       def resize_logical_volumes
         new_resource.logical_volumes.each do |lv|
-          lv.group new_resource.name
+          lv.group new_resource.group_name
           lv.run_action :resize
           @updates << lv.updated?
         end

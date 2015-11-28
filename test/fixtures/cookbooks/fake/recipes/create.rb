@@ -108,7 +108,7 @@ end
 
 lvm_volume_group 'vg-test-extend' do
   action :extend
-  name 'vg-test'
+  group_name 'vg-test'
   physical_volumes ['/dev/loop4', '/dev/loop5', '/dev/loop6', '/dev/loop7']
   notifies :run, 'script[note vg-test has been extended]', :immediately
 end

@@ -86,9 +86,9 @@ export PATH=$PATH:/sbin:/usr/sbin
   vgs | grep vg-test
 }
 
-@test "detects notification for creation of vg-data" {
+@test "detects notification for creation of vg-test" {
   grep 'vg-test has been created' /tmp/test_notifications
-  # TODO: Fix This [ $(grep 'vg-test has been created' /tmp/test_notifications | wc -l) -eq 1 ]
+  [ $(grep 'vg-test has been created' /tmp/test_notifications | wc -l) -eq 1 ]
 }
 
 @test "creates the logical volume 'test' on 'vg-test'" {

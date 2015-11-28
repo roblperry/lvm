@@ -46,26 +46,26 @@ class Chef
         @provider = Chef::Provider::LvmVolumeGroup
       end
 
-      # Attribute: name - name of the volume group
+      # Attribute: group_name - name of the volume group
       #
       # @param arg [String] the name of the volume group
       #
       # @return [String] the name of the volume group
       #
-      def name(arg = nil)
+      def group_name(arg = nil)
         set_or_return(
-          :name,
+          :group_name,
           arg,
           kind_of: String,
-          name_attribute: true,
           regex: /[\w+.-]+/,
-          required: true,
           callbacks: {
             "cannot be '.' or '..'" => proc do |value|
               !(value == '.' || value == '..')
             end
           }
-        )
+        ) || self.name
+        # Done this way (instead of setting the default volume name inside of the initialize) for,
+        # backward compatability with recipies that set name inside of the block
       end
 
       # Attribute: physical_volumes - list of physical devices this volume group should be restricted to
