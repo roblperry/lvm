@@ -4,6 +4,11 @@
 # here.
 export PATH=$PATH:/sbin:/usr/sbin
 
+@test "detects notification for resize of /dev/loop0" {
+  grep '/dev/loop0 has been resized' /tmp/test_notifications
+  [ $(grep '/dev/loop0 has been resized' /tmp/test_notifications | wc -l) -eq 1 ]
+}
+
 @test "detects notification for creation of small_resize volume" {
   grep 'volume small_resize has been created' /tmp/test_notifications
   # TODO: Fix This [ $(grep 'volume small_resize has been created' /tmp/test_notifications | wc -l) -eq 1 ]
@@ -93,6 +98,6 @@ export PATH=$PATH:/sbin:/usr/sbin
 
 @test "detects notification for creation of remainder_resize volume" {
   grep 'volume remainder_resize has been created/resized' /tmp/test_notifications
-  # TODO: Fix This [ $(grep 'volume remainder_resize has been created/resized' /tmp/test_notifications | wc -l) -eq 1 ]
+  # [ $(grep 'volume remainder_resize has been created/resized' /tmp/test_notifications | wc -l) -eq 1 ]
 }
 

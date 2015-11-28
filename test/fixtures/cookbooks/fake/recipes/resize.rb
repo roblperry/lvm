@@ -27,7 +27,7 @@ EOF
 end
 
 lvm_physical_volume 'loop0_resize' do
-  name '/dev/loop0'
+  volume_name '/dev/loop0'
   action :resize
   notifies :run, 'script[note /dev/loop0 has been resized]', :immediately
 end
