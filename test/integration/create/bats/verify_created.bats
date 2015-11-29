@@ -56,12 +56,6 @@ export PATH=$PATH:/sbin:/usr/sbin
   mount | grep /dev/mapper/vg--data-logs | grep /mnt/logs
 }
 
-# TODO: Fix This
-# @test "detects notification for creation of logs volume" {
-#   grep 'logs volume has been created' /tmp/test_notifications
-#   [ $(grep 'logs volume has been created' /tmp/test_notifications | wc -l) -eq 1 ]
-# }
-
 @test "creates the logical volume home on vg-data" {
   lvs | grep home | grep vg-data
 }
@@ -74,12 +68,6 @@ export PATH=$PATH:/sbin:/usr/sbin
   mountpoint /mnt/home
   mount | grep /dev/mapper/vg--data-home | grep /mnt/home
 }
-
-# TODO: Fix This
-# @test "detects notification for creation of home volume" {
-#   grep 'home volume has been created' /tmp/test_notifications
-#   [ $(grep 'home volume has been created' /tmp/test_notifications | wc -l) -eq 1 ]
-# }
 
 @test "creates the volume group vg-test" {
   vgs | grep vg-test

@@ -64,7 +64,6 @@ lvm_volume_group 'vg-data' do
     filesystem 'ext2'
     mount_point location: '/mnt/logs', options: 'noatime,nodiratime'
     stripes 2
-    notifies :run, 'script[note logs volume has been created]', :immediately
   end
 
   logical_volume 'home' do
@@ -73,25 +72,12 @@ lvm_volume_group 'vg-data' do
     mount_point '/mnt/home'
     stripes 1
     mirrors 2
-    notifies :run, 'script[note home volume has been created]', :immediately
   end
 end
 
 script 'note vg-data has been created' do
   interpreter 'bash'
   code "echo 'vg-data has been created' >> /tmp/test_notifications"
-  action :nothing
-end
-
-script 'note logs volume has been created' do
-  interpreter 'bash'
-  code "echo 'logs volume has been created' >> /tmp/test_notifications"
-  action :nothing
-end
-
-script 'note home volume has been created' do
-  interpreter 'bash'
-  code "echo 'home volume has been created' >> /tmp/test_notifications"
   action :nothing
 end
 
