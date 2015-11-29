@@ -49,10 +49,10 @@ Manages LVM physical volumes.
     <th>Default</th>
   </tr>
   <tr>
-    <td>name</td>
-    <td>(required) The device to create the new physical volume on</td>
+    <td>volume_name</td>
+    <td>The device to create the new physical volume on</td>
     <td><tt>'/dev/sda'</tt></td>
-    <td></td>
+    <td>defaults to 'name' if not specified</td>
   </tr>
 </table>
 
@@ -92,10 +92,10 @@ Manages LVM logical volumes.
     <th>Default</th>
   </tr>
   <tr>
-    <td>name</td>
-    <td>(name attribute) Name of the logical volume</td>
+    <td>volume_name</td>
+    <td>Name of the logical volume</td>
     <td><tt>bacon</tt></td>
-    <td></td>
+    <td>defaults to 'name' if not specified</td>
   </tr>
   <tr>
     <td>group</td>
@@ -235,10 +235,10 @@ Manages LVM volume groups.
     <th>Default</th>
   </tr>
   <tr>
-    <td>name</td>
-    <td>(required) Name of the volume group</td>
+    <td>group_name</td>
+    <td>Name of the volume group</td>
     <td><tt>'bacon'</tt></td>
-    <td></td>
+    <td>defaults to 'name' if not specified</td>
   </tr>
   <tr>
     <td>physical_volumes</td>
