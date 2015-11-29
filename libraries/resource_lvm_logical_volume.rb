@@ -60,7 +60,7 @@ class Chef
               !value.match(/.*(_mlog|_mimage).*/)
             end
           }
-        ) || self.name
+        ) || name
       end
 
       # Attribute: group - the volume group the logical volume belongs to

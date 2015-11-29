@@ -51,7 +51,7 @@ class Chef
           :volume_name,
           arg,
           kind_of: String
-        ) || self.name
+        ) || name
         # Done this way (instead of setting the default volume name inside of the initialize) for,
         # backward compatability with recipies that set name inside of the block
       end
